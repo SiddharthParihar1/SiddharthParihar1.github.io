@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 20% 4%;
+    --foreground: 180 100% 98%;
+    --card: 220 20% 8%;
+    --card-foreground: 180 100% 98%;
+    --popover: 220 20% 8%;
+    --popover-foreground: 180 100% 98%;
+    --primary: 175 80% 50%;
+    --primary-foreground: 220 20% 4%;
+    --secondary: 260 80% 60%;
+    --secondary-foreground: 180 100% 98%;
+    --muted: 220 15% 15%;
+    --muted-foreground: 220 10% 60%;
+    --accent: 175 80% 50%;
+    --accent-foreground: 220 20% 4%;
+    --destructive: 0 85% 60%;
+    --destructive-foreground: 180 100% 98%;
+    --border: 220 15% 20%;
+    --input: 220 15% 20%;
+    --ring: 175 80% 50%;
+    --radius: 0.75rem;
+    --glow: 175 80% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  ::selection {
+    @apply bg-primary/30 text-foreground;
+  }
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-background;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary/40 rounded-full;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent bg-[length:200%_auto];
+    animation: gradient-shift 3s ease infinite;
+  }
+  .glow {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.4), 0 0 40px hsl(var(--primary) / 0.2);
+  }
+  .glow-sm {
+    box-shadow: 0 0 10px hsl(var(--primary) / 0.3);
+  }
+  .glass {
+    @apply bg-card/60 backdrop-blur-xl border border-border/50;
+  }
+  .hover-lift {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/10;
+  }
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px hsl(var(--primary) / 0.4); }
+  50% { box-shadow: 0 0 35px hsl(var(--primary) / 0.6), 0 0 50px hsl(var(--primary) / 0.3); }
+}
+
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-fade-up { animation: fade-up 0.5s ease-out forwards; }
+.animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
